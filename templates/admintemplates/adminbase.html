@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="https://github.com/mdbootstrap/bootstrap-material-design/blob/master/css/mdb.min.css">
+</head>
+<body class="container-fluid">
+	<a href="{% url 'amapp:adminhome' %}">Home</a>
+	<a href="{% url 'amapp:adminteacherlist' %}">Teachers</a>
+	<a href="{% url 'amapp:adminteacherregistration' %}">Register Teacher</a>
+	<a href="{% url 'amapp:adminstudentlist' %}">Students</a>
+	<a href="{% url 'amapp:adminstudentregistration' %}">Register Student</a>
+	<a href="{% url 'amapp:adminprogramlist' %}">Programs</a>
+	<a href="{% url 'amapp:adminclassroomlist' %}">Programs</a>
+
+
+	{% block content %}
+	{% endblock %}
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

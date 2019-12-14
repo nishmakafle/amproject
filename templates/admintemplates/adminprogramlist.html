@@ -1,0 +1,32 @@
+{% extends 'admintemplates/adminbase.html' %}
+
+{% block title %}Program{% endblock %}
+
+{% block content %}
+<h3 style="text-align: center;">Program List</h3>
+
+<a class="btn btn-primary pull-right" href="{% url 'amapp:adminprogarmcreate' %}">Create Program</a>
+
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th>SN</th>
+			<th>Title</th>
+			
+			<th>Added on</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for program in progarmlist %}
+		<tr>
+			<td>{{forloop.counter}}</td>
+			<td>{{program.title}}</td>
+			<td>{{program.created_at}}</td>
+			
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+{% endblock %}

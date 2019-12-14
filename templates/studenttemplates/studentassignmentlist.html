@@ -1,0 +1,56 @@
+{% extends 'studenttemplates/studentbase.html' %}
+{% block title %}Assignments{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    
+                    <th>SN</th>
+                    <th>Title</th>
+                    <th>Given on</th>
+                    <th>Deadline</th>
+                    <th>Given_to</th>
+                    <th>Action</th>
+                </tr>   
+            </thead>                
+            <tbody>
+                {% for assignment in studentassignments %}
+                {% if assignment.student %}
+	                {% if assignment.student == request.user.student %}
+                    <tr>
+						<td>{{forloop.counter}}</td>
+						<td><a href="">{{assignment.title}}</a></td>
+                        <td>{{assignment.created_at}}<br/>({{assignment.created_at|timesince}} ago)</td> 
+						<td>{{assignment.deadline}}<br/>({{assignment.deadline|timeuntil}} remaining)</td>
+						<td>Me only</td>
+						<td>
+							<a href="{% url 'amapp:studentassignmentstart' assignment.id %}">Start assignment</a>							
+						</td>
+                    </tr>
+                    {% endif %}
+                {% else %}
+                <tr>
+						<td>{{forloop.counter}}</td>
+						<td><a href="">{{assignment.title}}</a></td>
+                        <td>{{assignment.created_at}}<br/>({{assignment.created_at|timesince}} ago)</td> 
+						<td>{{assignment.deadline}}<br/>({{assignment.deadline|timeuntil}} remaining)</td>
+						<td>Whole class room</td>
+						<td>
+							<a href="{% url 'amapp:studentassignmentstart' assignment.id %}">Start assignment</a>
+							
+						</td>
+                                        
+                                        
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

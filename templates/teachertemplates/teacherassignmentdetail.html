@@ -1,0 +1,44 @@
+{% extends 'teachertemplates/teacherbase.html' %}
+{% block title %}Assignment Details{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        all details related to assignments
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h3>Submissions</h3>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>SN</th>
+                    <th>Student</th>
+                    <th>Started on/Submitted on</th>
+                    <th>Status</th>
+                    <th>Review</th>
+                    <th>File</th>
+                    <th>Action</th>
+                </tr>   
+            </thead>
+
+            <tbody>
+                {% for submission in teacherassignment.submission_set.all %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{submission.student}}</td>
+                    <td>Starting: {{submission.created_at|date:"Y-m-d h:i a"}}<br>Submitted: {{submission.file_upload_date|date:"Y-m-d h:i a"}}</td>
+                    <td>{{submission.assignment_status}}</td>
+                    <td>{{submission.review}}</td>
+                    <td>{% if submission.file %}<a href="{{submission.file.url}}">Download</a>{% else %}No file available{% endif %}</td>
+                    <td>
+                        <a href="{% url 'amapp:teacherreview' submission.id %}">Give Review</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

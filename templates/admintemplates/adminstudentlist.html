@@ -1,0 +1,56 @@
+{% extends 'admintemplates/adminbase.html' %}
+
+{% block css %}
+{% endblock %}
+
+
+
+{% block content %}
+
+
+  <div class="row">
+    <div class="col-md-12">
+    	<h3 class="text-center ">Students<hr></h3>
+    	<a class="btn btn-primary pull-right" href="{% url 'amapp:adminstudentregistration' %}">Add</a>
+	<br>
+		<table class="table table-bordered table-striped">
+			<thead>
+				 <tr>
+					<th>SN</th>
+					<th>Name</th>
+					<th>Username</th>
+					<th>Class</th>
+					<th>Roll_No</th>
+					<th>Image</th>
+					<th>Email</th>
+					<th>Actions</th>
+				 </tr>
+			</thead>
+			<tbody>
+			   {% for student in studentlist %}
+				<tr>
+					<td>{{forloop.counter}}</td>
+					<td><a href="">{{student.full_name}}</a></td>
+					<td>{{student.user.username}}</td>
+					<td>{{student.class_room}}</td>
+					<td>{{student.roll_no}}</td>
+					<td><img src="{% if student.image %}{{student.image.url}}{% endif %}" style="width: 50px;"></td>
+					<td>{{student.user.email}}</td>
+					<td>
+						<a class="btn btn-primary" href="{% url 'amapp:adminstudentupdate' student.id %}"><span class="fa fa-pencil"></span></a>
+						<a class="btn btn-primary" href="{% url 'amapp:adminstudentdelete' student.id %}"><span class="fa fa-trash"></span></a>
+					</td>
+					
+				</tr>
+				{% endfor %}
+			 </tbody>
+		</table>
+</div>
+
+
+{% endblock %}
+
+
+
+{% block js %}
+{% endblock %}

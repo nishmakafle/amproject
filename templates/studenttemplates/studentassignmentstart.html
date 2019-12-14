@@ -1,0 +1,15 @@
+{% extends 'studenttemplates/studentbase.html' %}
+
+{% block content %}
+
+<h3 class="text-success">You have successfully started your assignment doing. Please be patient and you will be redirected to submission page</h3>
+
+{% endblock %}
+
+{% block js %}
+<script>
+	setTimeout(function(){
+		window.location.href="/student/detail/submission-{{submission.id}}/";
+	}, 5000)
+</script>
+{% endblock %}

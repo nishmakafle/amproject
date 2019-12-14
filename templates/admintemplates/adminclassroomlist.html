@@ -1,0 +1,34 @@
+{% extends 'admintemplates/adminbase.html' %}
+
+{% block title %}ClassRoom{% endblock %}
+
+{% block content %}
+<h3 style="text-align: center;">Program List</h3>
+
+<a class="btn btn-primary pull-right" href="{% url 'amapp:adminclassroomcreate' %}">Create Program</a>
+
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th>SN</th>
+			<th>Program</th>
+			<th>Semester</th>
+			
+			<th>Added on</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for classroom in classroomlist %}
+		<tr>
+			<td>{{forloop.counter}}</td>
+			<td>{{classroom.program}}</td>
+			<td>{{classroom.semester}}</td>
+			<td>{{classroom.created_at}}</td>
+			
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+{% endblock %}

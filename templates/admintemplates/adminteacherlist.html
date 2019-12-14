@@ -1,0 +1,41 @@
+{% extends 'admintemplates/adminbase.html' %}
+
+{% block title %}Admin Home{% endblock %}
+
+{% block content %}
+<h3 style="text-align: center;">Teacher List</h3>
+
+<a class="btn btn-primary pull-right" href="{% url 'amapp:adminteacherregistration' %}">Register Teacher</a>
+
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th>SN</th>
+			<th>Name</th>
+			<th>username</th>
+			<th>Address</th>
+			<th>Image</th>
+			<th>Added on</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for teacher in teacherlist %}
+		<tr>
+			<td>{{forloop.counter}}</td>
+			<td>{{teacher.full_name}}</td>
+			<td>{{teacher.user.username}}</td>
+			<td>{{teacher.address}}</td>
+			<td><img src="{{teacher.image.url}}" style="width: 50px;"></td>
+			<td>{{teacher.created_at}}</td>
+			<td>
+				<a href="{% url 'amapp:adminteacherdetail' teacher.id %}" class="btn btn-info"><span class="fa fa-eye"></span></a>
+				<a class="btn btn-primary" href="{% url 'amapp:adminteacherupdate' teacher.id %}"><span class="fa fa-pencil"></span></a>
+				<a class="btn btn-danger" href="{% url 'amapp:adminteacherdelete' teacher.id %}"><span class="fa fa-trash"></span></a>
+				</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+{% endblock %}

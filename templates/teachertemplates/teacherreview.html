@@ -1,0 +1,14 @@
+{% extends 'teachertemplates/teacherbase.html' %}
+{% block title %}Assignment Details{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+    	<form method="POST">
+    		{% csrf_token %}
+    		{{form.as_p}}
+    		<button class="btn btn-info">Give Review</button>
+    	</form>
+	</div>
+</div>
+{% endblock %}

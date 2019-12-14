@@ -1,0 +1,26 @@
+{% extends 'teachertemplates/teacherbase.html' %}
+
+{% block title %}Assignment Create{% endblock %}
+
+
+
+{% block content %}
+<div class="row">
+	<div class="col-md-5 mx-auto m-3">
+		
+		<h2 class="text-info text-center">Assignment Create</h2><hr>
+		<form method="POST" enctype="multipart/form-data">
+		   {% csrf_token %}
+		     <h4 class="text-danger text-center">{{errors}}</h4>
+		       {{form.as_p}}
+		       <div class="p-t-10">
+				<button class="btn btn-info btn-block " type="submit">Submit</button>
+				</div>
+		</form>
+
+	</div>
+</div>
+
+{% endblock %}
+
+

@@ -1,0 +1,26 @@
+{% extends 'studenttemplates/studentbase.html' %}
+
+{% block content %}
+<div class="row">
+	<div class="col-md-10 mx-auto">
+		
+	<p>Assignment: {{submission.assignment.title}}</p>
+	<p>Status: {{submission.assignment_status}}</p>
+	{{submission.assignment.deadline}}{{time_now}}
+	{% if submission.file %}
+	<a href="{{submission.file.url}}">Download</a>
+	{% elif submission.assignment.deadline|date:"YmdHis" > time_now|date:"YmdHis" %}
+	<form method="POST" enctype="multipart/form-data" action="{% url 'amapp:studentfileupload' submission.id %}">
+		{% csrf_token %}
+		<p><input type="file" name="submisison_file" class="form-control w-50"></p>
+		<button class="btn btn-primary w-25">Upload</button>
+	</form>
+	{% else %}
+		<h5 class="text-danger">You cannot submit the assignment now</h5>
+	{% endif %}
+
+
+
+	</div>
+</div>
+{% endblock %}

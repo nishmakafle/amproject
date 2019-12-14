@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://github.com/mdbootstrap/bootstrap-material-design/blob/master/css/mdb.min.css">
+
+  
+{% block css %}
+{% endblock %}
+</head>
+<body class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-light bg-info">
+  <a class="navbar-brand" href="#">Assignment</a>
+  <div class="collapse navbar-collapse text-white" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'amapp:studentassignmentlist' %}">Assignments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="">Submitted Assignment</a>
+      </li>
+    </ul>
+    <span class="navbar-text">
+      Logged in as: <span class="text-dark">{{request.user}}</span>
+        <a class="d-inline text-white" href="{% url 'amapp:logout' %}" style="color: white;">Logout</a>
+    </span>
+   
+  </div>
+</nav>
+
+{% block content %}
+{% endblock %}
+
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+{% block js %}
+{% endblock %}
+</body>
+</html>
