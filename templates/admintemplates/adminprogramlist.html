@@ -23,6 +23,10 @@
 			<td>{{forloop.counter}}</td>
 			<td>{{program.title}}</td>
 			<td>{{program.created_at}}</td>
+			<td>
+				<a class="btn btn-primary" href="{% url 'amapp:adminprogramupdate' program.id %}"><span class="fa fa-pencil"></span></a>
+				<a class="btn btn-primary" href="{% url 'amapp:adminprogramdelete' program.id %}"><span class="fa fa-trash"></span></a>
+			</td>
 			
 		</tr>
 		{% endfor %}

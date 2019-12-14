@@ -18,14 +18,12 @@
   <div class="collapse navbar-collapse text-white" id="navbarText">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'amapp:studenthome' %}">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{% url 'amapp:studentassignmentlist' %}">Assignments</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="">Submitted Assignment</a>
-      </li>
+     
     </ul>
     <span class="navbar-text">
       Logged in as: <span class="text-dark">{{request.user}}</span>

@@ -2,14 +2,34 @@
 {% block title %}Assignment Details{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-12">
-        all details related to assignments
+<div class="row p-3">
+    <div class="col-md-8 mx-auto">
+        <h2 style="text-align: center;">Assignment Detail</h2>
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Title :</th>
+                <td>{{teacherassignment.title}}</td>
+                
+            </tr>
+            <tr>
+                <th>Given_on :</th>
+                <td>{{teacherassignment.created_at}}</td>
+                
+            </tr>
+                <th>Deadline :</th>
+                <td>{{teacherassignment.deadline}}</td>
+                
+            </tr>
+            <tr>
+                <th>Assignment_File</th>
+                <td><a href="{{teacherassignment.file.url}}" target="_blank">View</a> | <a href="{{teacherassignment.file.url}}" target="_blank" download>Download</a></td>
+            </tr>   
+        </table>
     </div>
-</div>
+</div><br>
 <div class="row">
     <div class="col-md-12">
-        <h3>Submissions</h3>
+        <h3 style="text-align: center;">Submissions of this Assignment</h3>
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -31,7 +51,7 @@
                     <td>Starting: {{submission.created_at|date:"Y-m-d h:i a"}}<br>Submitted: {{submission.file_upload_date|date:"Y-m-d h:i a"}}</td>
                     <td>{{submission.assignment_status}}</td>
                     <td>{{submission.review}}</td>
-                    <td>{% if submission.file %}<a href="{{submission.file.url}}">Download</a>{% else %}No file available{% endif %}</td>
+                    <td>{% if submission.file %}<a href="{{submission.file.url}}" target="_blank">View</a> | <a href="{{submission.file.url}}" target="_blank" download>Download</a>{% else %}No file available{% endif %}</td>
                     <td>
                         <a href="{% url 'amapp:teacherreview' submission.id %}">Give Review</a>
                     </td>

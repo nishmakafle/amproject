@@ -92,7 +92,7 @@ class Assignment(TimeStamp):
     student = models.ForeignKey(
         Student, on_delete=models.SET_NULL, null=True, blank=True)
     title = models.CharField(max_length=200)
-    file = models.FileField(upload_to=200)
+    file = models.FileField(upload_to="assignments")
     deadline = models.DateTimeField()
 
     def __str__(self):
@@ -112,7 +112,7 @@ class Submission(TimeStamp):
     assignment_status = models.CharField(
         max_length=50, choices=ASSIGNMENT_STATUS, default="Assigned")
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    file = models.FileField(null=True, blank=True)
+    file = models.FileField(upload_to="submissions", null=True, blank=True)
     file_upload_date = models.DateTimeField(null=True, blank=True)
     review = models.CharField(max_length=200, null=True, blank=True)
 

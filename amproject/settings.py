@@ -74,7 +74,7 @@ WSGI_APPLICATION = 'amproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-USE_POSTGRESQL = True
+USE_POSTGRESQL = False
 if USE_POSTGRESQL:
     DATABASES = {
         'default': {

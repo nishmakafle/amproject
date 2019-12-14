@@ -25,6 +25,10 @@
 			<td>{{classroom.program}}</td>
 			<td>{{classroom.semester}}</td>
 			<td>{{classroom.created_at}}</td>
+			<td>
+				<a class="btn btn-primary" href="{% url 'amapp:adminclassroomupdate' classroom.id %}"><span class="fa fa-pencil"></span></a>
+				<a class="btn btn-primary" href="{% url 'amapp:adminclassroomdelete' classroom.id %}"><span class="fa fa-trash"></span></a>
+			</td>
 			
 		</tr>
 		{% endfor %}

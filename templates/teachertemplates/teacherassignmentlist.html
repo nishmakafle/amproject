@@ -5,6 +5,9 @@
 
 
 {% block content %}
+
+
+
 <div class="row">
     <div class="col-md-12">
 
@@ -18,7 +21,7 @@
                     <th>ClassRoom</th>
                     <th>Given on</th>
                     <th>Deadline</th>
-                    <th>Given_to</th>
+                    <th>Specific Student</th>
                     <th>Update</th>
                 </tr>   
             </thead>                
@@ -30,7 +33,7 @@
                         <td>{{assignment.class_room}}</td> 
                         <td>{{assignment.created_at}}</td> 
 						<td>{{assignment.deadline}}</td>
-						<td><a href="">{{assignment.student}}</a></td>
+						<td><a href="">{% if assignment.student %}{{assignment.student}}{% else %}whole classroom{% endif %}</a></td>
 						<td>
 							<a class="btn btn-primary" href="{% url 'amapp:teacherassignmnetupdate' assignment.id %}"><span class="fa fa-pencil"></span></a>
 							<a class="btn btn-primary" href="{% url 'amapp:teacherassignmentdelete' assignment.id %}"><span class="fa fa-trash"></span></a>

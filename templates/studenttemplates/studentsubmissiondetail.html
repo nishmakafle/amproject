@@ -2,23 +2,56 @@
 
 {% block content %}
 <div class="row">
-	<div class="col-md-10 mx-auto">
-		
-	<p>Assignment: {{submission.assignment.title}}</p>
-	<p>Status: {{submission.assignment_status}}</p>
-	{{submission.assignment.deadline}}{{time_now}}
+	<div class="col-md-10 mx-auto p-2">
+		<table class="table table-bordered table-striped">
+			
+			<tr>
+				
+				<th>Assignment: </th>
+				<td>{{submission.assignment.title}}</td>
+			</tr>
+			<tr>
+				
+				<th>Deadline: </th>
+				<td>{{submission.assignment.deadline}}</td>
+			</tr>
+			<tr>
+				
+				<th>Submitted_Date: </th>
+				<td>{{time_now}}</td>
+			</tr>
+
+			<tr>
+				
+				<th>Status: </th>
+				<td>{{submission.assignment_status}}</td>
+			</tr>
+			<tr>
+				
+				<th>Review: </th>
+				<td>{{submission.review}}</td>
+			</tr>
+	
 	{% if submission.file %}
-	<a href="{{submission.file.url}}">Download</a>
+	<tr>
+		<th>File: </th>
+		<td><a href="{{submission.file.url}}" target="_blank">View</a> |
+		<a href="{{submission.file.url}}" download>Download</a>
+	    </td>
+
 	{% elif submission.assignment.deadline|date:"YmdHis" > time_now|date:"YmdHis" %}
 	<form method="POST" enctype="multipart/form-data" action="{% url 'amapp:studentfileupload' submission.id %}">
 		{% csrf_token %}
+		<h3>Upload Submission</h3>
 		<p><input type="file" name="submisison_file" class="form-control w-50"></p>
 		<button class="btn btn-primary w-25">Upload</button>
 	</form>
 	{% else %}
 		<h5 class="text-danger">You cannot submit the assignment now</h5>
 	{% endif %}
+</tr>
 
+	</table>
 
 
 	</div>

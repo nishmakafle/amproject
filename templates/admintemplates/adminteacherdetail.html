@@ -3,7 +3,7 @@
 {% block title %}{{teacher.full_name}} detail{% endblock %}
 
 {% block content %}
-<h3>{{teacher.full_name}}</h3>
+<h3 style="text-align: center;"> Assignment Given_By: {{teacher.full_name}} </h3>
 
 <div class="row">
     <div class="col-md-12">
@@ -17,8 +17,8 @@
                     <th>ClassRoom</th>
                     <th>Given on</th>
                     <th>Deadline</th>
-                    <th>Given_to</th>
-                    <th>Update</th>
+
+                    
                 </tr>   
             </thead>                
             <tbody>
@@ -29,12 +29,8 @@
                         <td>{{assignment.class_room}}</td> 
                         <td>{{assignment.created_at}}</td> 
 						<td>{{assignment.deadline}}</td>
-						<td><a href="">{{assignment.student}}</a></td>
-						<td>
-							<a class="btn btn-primary" href="{% url 'amapp:teacherassignmnetupdate' assignment.id %}"><span class="fa fa-pencil"></span></a>
-							<a class="btn btn-primary" href="{% url 'amapp:teacherassignmentdelete' assignment.id %}"><span class="fa fa-trash"></span></a>
-						</td>
-                                        
+						
+						          
                                         
                     </tr>
                 {% endfor %}

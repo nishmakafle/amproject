@@ -147,6 +147,19 @@ class AdminProgramListView(AdminRequiredMixin, ListView):
     context_object_name = 'progarmlist'
 
 
+class AdminProgramUpdateView(AdminRequiredMixin, UpdateView):
+    template_name = 'admintemplates/adminprogramcreate.html'
+    form_class = ProgramForm
+    model = Program
+    success_url = reverse_lazy('amapp:adminprogramlist')
+
+
+class AdminProgramDeleteView(AdminRequiredMixin, DeleteView):
+    template_name = 'admintemplates/adminprogramdelete.html'
+    model = Program
+    success_url = reverse_lazy('amapp:adminprogramlist')
+
+
 class AdminClassRoomCreateView(AdminRequiredMixin, CreateView):
     template_name = 'admintemplates/adminclassroomcreate.html'
     form_class = ClassRoomForm
@@ -157,6 +170,19 @@ class AdminClassRoomListView(AdminRequiredMixin, ListView):
     template_name = 'admintemplates/adminclassroomlist.html'
     model = ClassRoom
     context_object_name = 'classroomlist'
+
+
+class AdminClassRoomUpdateView(AdminRequiredMixin, UpdateView):
+    template_name = 'admintemplates/adminclassroomcreate.html'
+    form_class = ClassRoomForm
+    model = ClassRoom
+    success_url = reverse_lazy('amapp:adminclassroomlist')
+
+
+class AdminClassRoomDeleteView(AdminRequiredMixin, DeleteView):
+    template_name = 'admintemplates/adminclassroomdelete.html'
+    model = ClassRoom
+    success_url = reverse_lazy('amapp:adminclassroomlist')
 
 
 class TeacherRequiredMixin(object):
@@ -177,7 +203,7 @@ class TeacherHomeView(TeacherRequiredMixin, TemplateView):
 class TeacherAssignmentCreateView(TeacherRequiredMixin, CreateView):
     template_name = 'teachertemplates/teacherassignmentcreate.html'
     form_class = AssignmnetForm
-    success_url = reverse_lazy('amapp:teacherhome')
+    success_url = reverse_lazy('amapp:teacherassignmnetlist')
 
     def form_valid(self, form):
         form.instance.teacher = Teacher.objects.get(user=self.request.user)
@@ -247,6 +273,14 @@ class StudentAssignmentListView(StudentRequiredMixin, ListView):
 
         return qs.filter(class_room=self.student.class_room)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        submissions = Submission.objects.filter(student=self.student)
+        submitted_assignmentlist = [
+            submission.assignment for submission in submissions]
+        context['submitted_assignmentlist'] = submitted_assignmentlist
+        return context
+
 
 class StudentAssignmentStartView(StudentRequiredMixin, TemplateView):
     template_name = "studenttemplates/studentassignmentstart.html"
@@ -291,10 +325,7 @@ class StudentFileUploadView(StudentRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         submission = Submission.objects.get(id=self.kwargs['sub_id'])
         file = request.FILES['submisison_file']
-        fs = FileSystemStorage()
-        filename = fs.save(file.name, file)
-        uploaded_file_url = fs.url(filename)
-        submission.file = uploaded_file_url
+        submission.file = file
         submission.assignment_status = "Completed"
         submission.file_upload_date = datetime.now()
         submission.save()

@@ -34,12 +34,20 @@ urlpatterns = [
          name='adminprogarmcreate'),
     path('admin/program/list/', AdminProgramListView.as_view(),
          name='adminprogramlist'),
+    path('admin/progarm/<int:pk>/update/',
+         AdminProgramUpdateView.as_view(), name='adminprogramupdate'),
+    path('admin/program/<int:pk>/delete/',
+         AdminProgramDeleteView.as_view(), name='adminprogramdelete'),
 
 
     path('admin/classroom/create/', AdminClassRoomCreateView.as_view(),
          name='adminclassroomcreate'),
     path('admin/classroom/list/', AdminClassRoomListView.as_view(),
          name='adminclassroomlist'),
+    path('admin/classroom/<int:pk>/update/',
+         AdminClassRoomUpdateView.as_view(), name='adminclassroomupdate'),
+    path('admin/program/<int:pk>/delete/',
+         AdminClassRoomDeleteView.as_view(), name='adminclassroomdelete'),
     # teacher urls
 
     path('teacher/home/', TeacherHomeView.as_view(), name='teacherhome'),

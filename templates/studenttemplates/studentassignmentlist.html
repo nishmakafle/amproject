@@ -13,6 +13,8 @@
                     <th>Title</th>
                     <th>Given on</th>
                     <th>Deadline</th>
+                    <th>Download</th>
+                    <th>Given_by</th>
                     <th>Given_to</th>
                     <th>Action</th>
                 </tr>   
@@ -23,25 +25,40 @@
 	                {% if assignment.student == request.user.student %}
                     <tr>
 						<td>{{forloop.counter}}</td>
-						<td><a href="">{{assignment.title}}</a></td>
+						<td><a href="{% url 'amapp:studentassignmentstart' assignment.id %}">{{assignment.title}}</a></td>
                         <td>{{assignment.created_at}}<br/>({{assignment.created_at|timesince}} ago)</td> 
-						<td>{{assignment.deadline}}<br/>({{assignment.deadline|timeuntil}} remaining)</td>
+                        <td>{{assignment.deadline}}<br/>({{assignment.deadline|timeuntil}} remaining)</td>
+                        <td><a href="{{assignment.file.url}}" target="_blank">View</a> | <a href="{{assignment.file.url}}" download>Download</a></td>
+                        <td>{{assignment.teacher}}</td>
 						<td>Me only</td>
 						<td>
-							<a href="{% url 'amapp:studentassignmentstart' assignment.id %}">Start assignment</a>							
+                            <a href="{% url 'amapp:studentassignmentstart' assignment.id %}">
+                                {% if assignment in submitted_assignmentlist %}
+                                    View submission
+                                    {% else %}
+                                    Start Assignment
+                                    {% endif %}
+                            </a>					
 						</td>
                     </tr>
                     {% endif %}
                 {% else %}
                 <tr>
 						<td>{{forloop.counter}}</td>
-						<td><a href="">{{assignment.title}}</a></td>
+						<td><a href="{% url 'amapp:studentassignmentstart' assignment.id %}">{{assignment.title}}</a></td>
                         <td>{{assignment.created_at}}<br/>({{assignment.created_at|timesince}} ago)</td> 
 						<td>{{assignment.deadline}}<br/>({{assignment.deadline|timeuntil}} remaining)</td>
+						<td><a href="{{assignment.file.url}}" target="_blank">View</a> | <a href="{{assignment.file.url}}" target="_blank" download>Download</a></td>
+                        <td>{{assignment.teacher}}</td>
 						<td>Whole class room</td>
 						<td>
-							<a href="{% url 'amapp:studentassignmentstart' assignment.id %}">Start assignment</a>
-							
+							<a href="{% url 'amapp:studentassignmentstart' assignment.id %}">
+                                {% if assignment in submitted_assignmentlist %}
+                                    View submission
+                                    {% else %}
+                                    Start Assignment
+                                    {% endif %}
+							</a>
 						</td>
                                         
                                         

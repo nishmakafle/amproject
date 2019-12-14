@@ -112,7 +112,7 @@ class AssignmnetForm(forms.ModelForm):
                   'student', 'title', 'file', 'deadline']
         widgets = {
             'deadline': forms.DateInput(attrs={
-                # 'type': 'date',
+                'type': 'date',
                 'class': 'form-control'
             }),
         }
